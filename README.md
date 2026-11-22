@@ -1,21 +1,21 @@
 # init-agent
 
-AIエージェントと協働するためのプロジェクト雛形。
+AIエージェントと協働するためのプロジェクト雛形。ルールを書いた `AGENTS.md`、引き継ぎ用の `doc/メモ.md`、永続メモリを切る設定が入る。
 
 ## 使い方
 
-```sh
-# 1. 始める
-gh repo clone r77tchan/init-agent <new-name>
+空のフォルダ（空のリポジトリでもよい）で実行する。この README 以外のファイルが、その場に置かれる。空でないときは、何もせずに止まる。
 
-# 2. .gitとREADME削除
-rm -rf .git README.md
+```sh
+if [ -z "$(ls -A | grep -vxF -e .git -e .DS_Store)" ]; then curl -sL https://github.com/r77tchan/init-agent/archive/main.tar.gz | tar -xzk --strip-components=1 --exclude README.md; else echo "空のフォルダではないので、何もしなかった"; fi
 ```
 
-## 構成
+そのあと、`AGENTS.md` の先頭にプロジェクトの説明を1行書く。
 
-- `AGENTS.md` — セッション開始時に読むファイルの一覧
-- `CLAUDE.md` — Claude Code 用（`AGENTS.md` を参照）
-- `doc/指示.md` — プロジェクトのルールと目的（AIは編集しない）
-- `doc/メモ.md` — セッションをまたいで残す情報の置き場
-- `.claude/settings.json` / `.codex/config.toml` — 永続メモリ無効の設定
+## AIに頼む場合
+
+空のフォルダで、次のように伝える。
+
+```text
+https://github.com/r77tchan/init-agent の使い方どおりに、このフォルダを初期化して
+```
